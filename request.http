@@ -1,0 +1,38 @@
+###
+POST http://localhost:5000/api/costumer HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "DueDate": "Fecha actual: Date.now()",
+    "DocNumber": "1053811422",
+    "Status": "Payable",
+    "Line": [
+    {
+        "Amount": "500",
+        "DetailType": "ExpenseDetail",
+        "ExpenseDetail": {
+            "Customer": {
+                "value": "ABC123",
+                "name": "Sample Customer",
+                "Ref": {
+                    "value": "DEF234",
+                    "name": "Sample Construction"
+                }
+            },
+            "Account": {
+                "value": "EFG345",
+                "name": "Fuel"
+            },
+            "LineStatus": "Billable"
+            }
+        }
+    ],
+    "Vendor": {
+        "value": "GHI456",
+        "name": "Sample Bank"
+    },
+    "TotalAmt": "1990.19"
+}
+
+###
+GET http://localhost:5000/api/costumers HTTP/1.1
