@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 
 const costumerSchema = mongoose.Schema({
+
     dueDate:{type: String, require: true},
     docNumber:{type: String, require: true},
     status:{type: String, require: true},
-    line:{  type: Object, 
+    line:{type: Object, 
             require: true, 
                 amount:{
-                    type: String,
+                    type: Number,
                     require: true
                 },
                 detailType:{
@@ -17,7 +18,7 @@ const costumerSchema = mongoose.Schema({
                 expenseDetail:{
                     type: Object,
                     require: true,
-                        Customer:{
+                        customer:{
                             type: Object,
                             require: true,
                                 value:{
@@ -72,7 +73,7 @@ const costumerSchema = mongoose.Schema({
             }
 
     },
-    totalAmount:{type: String, require: true}
+    totalAmount:{type: Number, require: true}
 });
 
 module.exports = mongoose.model('CostumerCollletion', costumerSchema);

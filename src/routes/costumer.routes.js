@@ -8,10 +8,10 @@ costumer_routes.post('/costumer', (req, res) => {
     new_costumer
       .save()
       .then((data) => {
-        res.json(data);
+        res.json({message:data});
       })
       .catch((err) => {
-        res.json(err);
+        res.json({message:err});
       });
 });
 
@@ -26,7 +26,7 @@ costumer_routes.get("/costumers", (req, res) => {
       });
 });
 
-costumer_routes.get('/costumer/costumerId', (req, res)=>{
+costumer_routes.get('/costumer/:costumerId', (req, res)=>{
     const { costumerId } = req.params;
     costumer_model
         .findById(costumerId)
@@ -34,8 +34,16 @@ costumer_routes.get('/costumer/costumerId', (req, res)=>{
         .catch((err) => res.json({message: err}));
 });
 
+costumer_routes.get("costumer/reference", (req, res)=>{
+  const { reference } = req.params
+  costumer_model.find({reference: refValue}).toArray((err, costumers) => {
+    res.status(200).json(costumers);
+  })
+});
 
-costumer_routes.put("/costumer/costumerId", (req, res) => {
+
+
+costumer_routes.put("/costumer/:costumerId", (req, res) => {
     const { costumerId } = req.params;
     const { dueDate, docNumber, status, line, vendor, totalAmount } = req.body;
     costumer_model
@@ -44,7 +52,7 @@ costumer_routes.put("/costumer/costumerId", (req, res) => {
       .catch((err) => res.json({ message: err }));
 });
 
-costumer_routes.delete("/costumer/costumerId", (req, res) => {
+costumer_routes.delete("/costumer/:costumerId", (req, res) => {
     const { costumerId } = req.params;
     costumer_model
           .deleteOne({ _id: costumerId })
